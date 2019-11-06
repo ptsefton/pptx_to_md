@@ -1,0 +1,65 @@
+on run {dir, pptfile, filename}
+
+tell application "PowerPoint"
+  activate
+  open pptfile
+end tell
+delay 3
+tell application "System Events"
+    tell process "PowerPoint"
+        set window_name to name of front window
+
+        --  click menu bar item "File" of menu bar 1
+        --click menu item \"Export...\" of menu 1 of menu bar item \"File\" of menu bar 1
+        click menu item "Export..." of menu 1 of menu bar item "File" of menu bar 1
+        keystroke return
+
+        delay 3
+        tell sheet 1 of window window_name
+            --key down command
+            --keystroke "a"
+            --delay 1
+            --key up command
+            --keystroke filename
+            --delay 2
+            --key down shift
+            --key down command
+            --keystroke "g"
+
+            --key up shift
+            --key up command
+
+            --delay 0.4
+            --keystroke dir
+            --delay 2
+            --keystroke return
+
+            -- click pop up button 2
+            click pop up button 2
+            delay 1
+            keystroke "PNG"
+
+            delay 1
+            keystroke return
+
+            delay 3
+            try 
+              click UI Element "Replace"
+            end try
+
+        end tell
+        delay 2
+        try
+          tell sheet 1 of window window_name
+              click UI Element "Replace"
+          end tell
+        end try
+        delay 1
+
+        keystroke return
+
+
+    end tell
+end tell
+
+end
