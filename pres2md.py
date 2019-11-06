@@ -103,6 +103,7 @@ if args["powerpoint"]:
     save_images_using_powerpoint()
 else:
     md = parse_preso()
+    
 
 with open(md_path, 'w') as o:
     print("writing", md_path)

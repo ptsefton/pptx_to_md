@@ -67,8 +67,22 @@ If you're using Pelican you can also add a prefix to the image paths:
 
 ## Install it
 
-Make a virtual environment
+This project uses pipenv. This is my first time - let me know if these instructions don't work.
 
-Install the dependencies
+First, [install pipenv](https://github.com/pypa/pipenv), eg with Brew:
+    brew install pipenv
+
+To use this:
+
+```
+git clone https://github.com/ptsefton/pptx_to_md.git`
+cd pptx_to_md
+pipenv shell
+pipenv install
+```
+
+You _should_ end up in a virtual environment with the dependencies (python-pptx) installed and ready to go.
+
+
 
 
