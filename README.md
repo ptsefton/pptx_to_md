@@ -3,16 +3,34 @@
 Powerpoint to Markdown converter - Python 3 script
 
 
-
 ## Audience
 
 This is for people who know how to run Python, instructions are for MacOs.
 
 ## About 
 
-This is a simple rough and ready way to turn a Powerpoint slide deck into Markdown. It will convert the slides to PNG format (one per slide), put any text it can find on the slide into the alt attribute, and extract slide notes as a set of plain-text paragraphs.
+This is a simple rough and ready way to turn a Powerpoint slide deck into Markdown, assuming that the slides have first been exported as a series of PNG images.
 
 Hint: Format your slide notes as Markdown/Commonmark for instant gratification
+
+## Installation
+
+This project uses the [Poetry](https://python-poetry.org/) package manager. 
+
+* Install Poetry if you don't have it.
+
+* Get this code :
+   ```
+   cd ~/working
+   git clone https://github.com/ptsefton/pptx_to_md.git
+   cd pptx_to_md
+   ```
+
+* Set up a virtual environment with Poetry
+  ```
+  poetry install # Installs the dependencies in a virtual environment
+  poetry shell # Starts an shell so you can use python
+  ```
 
 ## Usage
 
@@ -36,7 +54,7 @@ You should now have a directory named for your pptx file minus the extension.
 
 If you're on a Mac, and you have Powerpoint, try running with the -p flag:
 
-   python3 pres2md.py -p your-preso.pptx 
+   python pptx2md.py -p your-preso.pptx 
 
 The first time you access a file, the operating system will make you do an authentication step.
 
@@ -49,14 +67,14 @@ The first time you access a file, the operating system will make you do an authe
 
 The second and final step is to generate the Markdown/Commonmark file.   
 
-When you have a directory with the same name as your .pptx file (minus the extension) run the code with your.
+When you have a directory with the same name as your .pptx file witting beside it in the current working direcotry (minus the extension) run the code with your.
 
-    python3 pres2md.py  your-preso.pptx 
+    python pres2md.py  your-preso.pptx 
 
 
 If you're using Pelican or another CMS that needs it you can also add a prefix to the image paths:
 
-    python3 pres2md.py -i {attach} your-preso.pptx 
+    python pres2md.py -i {attach} your-preso.pptx 
 
 
 
