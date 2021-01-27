@@ -53,7 +53,7 @@ def save_images_using_powerpoint():
 
 def parse_preso():
     prs = Presentation(filename)
-
+    title = prs.core_properties.title
     slides = []
     for slide in prs.slides:
         s = {"text": "", "notes": ""}
@@ -64,7 +64,7 @@ def parse_preso():
 
     md = """---
     title:  >
-      Untitled
+      %s
     date:
     slug: %s
     category:
@@ -73,7 +73,7 @@ def parse_preso():
 
 
 
-    """ % (stem)
+    """ % (title, stem)
 
 
     count = 0

@@ -54,9 +54,11 @@ When you have a directory with the same name as your .pptx file (minus the exten
     python3 pres2md.py  your-preso.pptx 
 
 
-If you're using Pelican you can also add a prefix to the image paths:
+If you're using Pelican or another CMS that needs it you can also add a prefix to the image paths:
 
-    python3 pres2md.py -i {static} your-preso.pptx 
+    python3 pres2md.py -i {attach} your-preso.pptx 
+
+
 
 
 
