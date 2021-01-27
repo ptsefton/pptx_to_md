@@ -86,7 +86,7 @@ def parse_preso():
         image_path = formatString % count
         md += """
     <section typeof='http://purl.org/ontology/bibo/Slide'>
-    <img src='%s%s' alt='%s%s' title='%s' border='1'  width='85%%'/>
+    <img src='%s%s' alt='%s' title='%s' border='1'  width='85%%'/>
 
 
     %s
@@ -95,7 +95,7 @@ def parse_preso():
 
     </section>
 
-            """  % (img_prefix, image_path, html.escape(slide["text"], quote=True), html.escape(slide["text"], quote=True), str(count), slide["notes"])
+            """  % (img_prefix, image_path, html.escape(slide["text"], quote=True), str(count), slide["notes"])
     return md
 
 
