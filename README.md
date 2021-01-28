@@ -80,29 +80,3 @@ If you're using Pelican or another CMS that needs it you can also add a prefix t
 
 
 
-
-
-
-
-
-## Install it
-
-This project uses pipenv. This is my first time - let me know if these instructions don't work.
-
-First, [install pipenv](https://github.com/pypa/pipenv), eg with Brew:
-    brew install pipenv
-
-To use this:
-
-```
-git clone https://github.com/ptsefton/pptx_to_md.git`
-cd pptx_to_md
-pipenv shell
-pipenv install
-```
-
-You _should_ end up in a virtual environment with the dependencies (python-pptx) installed and ready to go.
-
-
-
-
