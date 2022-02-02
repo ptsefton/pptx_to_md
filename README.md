@@ -41,26 +41,27 @@ This project uses the [Poetry](https://python-poetry.org/) package manager.
 
 To create a markdown version of a `.pptx` file, run this:
 
-    python pres2md.py  your-preso.pptx 
+    python pptx2md.py  your-preso.pptx 
 
 This will create a directory `your-preso/` and put an `index.md` file in it.
 
 This WILL NOT create images for the slides - for that you need a PDF file. The best way to get a PDF is to manually create it from the application you used to make the .pptx file, usually Microsoft Word or Google Slides. if you have a PDF file with the same name as the .pprtx with a .pdf extension just do:
 
-    python pres2md.py  --pdf your-preso.pptx 
+    python pptx2md.py  --pdf your-preso.pptx 
 
 If you're using Pelican or another CMS that needs it you can also add a prefix to the image paths:
 
-    python pres2md.py -p -i {attach} your-preso.pptx 
+    python pptx2md.py -p -i {attach} your-preso.pptx 
 
 If you would like to try your luck at getting Libre/Open Office to generate the PDF for you you can do this:
 
-   # On a mac with LibreOffice installed
-   python3 pptx2md.py --soffice /Applications/LibreOffice.app/Contents/MacOS/soffice  --topdf  preso.pptx
+```
+# On a mac with LibreOffice installed
+python3 pptx2md.py --soffice /Applications/LibreOffice.app/Contents/MacOS/soffice  --topdf  preso.pptx
 
-   # On linux or where soffice is in your path
-   python3 pptx2md.py --topdf  preso.pptx
-
+# On linux or where soffice is in your path
+python3 pptx2md.py --topdf  preso.pptx
+```
 
 ### As a docker container (experimental)
 
