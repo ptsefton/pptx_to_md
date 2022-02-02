@@ -2,16 +2,20 @@
 
 Powerpoint to Markdown converter - Python 3 script
 
+NOTE: This works on `.pptx` files ONLY - if you're using Google Drive or Keynote etc export your presentation to .pptx first.
+
+What does it do:
+
+Takes a PowerPoint file and a PDF of the same file (generated from the same application) and generates a Markdown version in a directory with an image for each slide and a yaml metadata block as used by various static site generators.
 
 ## Audience
 
-This is for people who know how to run Python, instructions are for MacOs.
+This is for people who know how to run Python or Docker. Instructions are for MacOs.
 
 ## About 
 
-This is a simple rough and ready way to turn a Powerpoint slide deck into Markdown, assuming that the slides have first been exported as a series of PNG images.
+This is a simple rough and ready way to turn a Powerpoint slide deck into Markdown.
 
-Hint: Format your slide notes as Markdown/Commonmark for instant gratification
 
 ## Installation
 
@@ -32,49 +36,43 @@ This project uses the [Poetry](https://python-poetry.org/) package manager.
   poetry shell # Starts an shell so you can use python
   ```
 
-## Usage
 
-NOTE: This works on `.pptx` files ONLY - if you're using Google Drive or Keynote etc export your presentation to .pptx first.
+### Usage
 
-The first step is to save the slides as PNG images. You can try to do this automatically (see below) but it's actually just as fast to do it manually.
-
-### Manually generate images
-
-* Open the presentation.
-
-* From the `File` menu select `Export...` and choose `PNG` in `File Format` dropdown - also select `Save Every Slide`.
-
-*  Click `Replace`
-
-* Click OK on the confirmation dialogue "Each slide in your presentation has been saved as a separate file in the folder /your/path/presentation".
-
-You should now have a directory named for your pptx file minus the extension.
-
-### Or,automatically generate images
-
-If you're on a Mac, and you have Powerpoint, try running with the -p flag:
-
-   python pptx2md.py -p your-preso.pptx 
-
-The first time you access a file, the operating system will make you do an authentication step.
-
-*  If the script fails try running it again. 
-
-*  If it stalls for more than a few seconds try clicking the dialogue boxes yourself.
-
-
-### Generate the markdown file
-
-The second and final step is to generate the Markdown/Commonmark file.   
-
-When you have a directory with the same name as your .pptx file witting beside it in the current working direcotry (minus the extension) run the code with your.
+To create a markdown version of a `.pptx` file, run this:
 
     python pres2md.py  your-preso.pptx 
 
+This will create a directory `your-preso/` and put an `index.md` file in it.
+
+This WILL NOT create images for the slides - for that you need a PDF file. The best way to get a PDF is to manually create it from the application you used to make the .pptx file, usually Microsoft Word or Google Slides. if you have a PDF file with the same name as the .pprtx with a .pdf extension just do:
+
+    python pres2md.py  --pdf your-preso.pptx 
 
 If you're using Pelican or another CMS that needs it you can also add a prefix to the image paths:
 
-    python pres2md.py -i {attach} your-preso.pptx 
+    python pres2md.py -p -i {attach} your-preso.pptx 
+
+If you would like to try your luck at getting Libre/Open Office to generate the PDF for you you can do this:
+
+   # On a mac with LibreOffice installed
+   python3 pptx2md.py --soffice /Applications/LibreOffice.app/Contents/MacOS/soffice  --topdf  preso.pptx
+
+   # On linux or where soffice is in your path
+   python3 pptx2md.py --topdf  preso.pptx
+
+
+### As a docker container (experimental)
+
+Make a container: 
+
+`docker build -t rocxl .`
+
+Run the container:
+
+`docker run -v ${pwd} pptx2md yourfile.pptx`
+
+
 
 
 
