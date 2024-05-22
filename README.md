@@ -43,15 +43,17 @@ To create a markdown version of a `.pptx` file, run this:
 
     python pptx2md.py  your-preso.pptx 
 
-This will create a directory `your-preso/` and put an `index.md` file in it.
+The result ia directory `your-preso/` and with an `index.md` file in it.
 
-This WILL NOT create images for the slides - for that you need a PDF file. The best way to get a PDF is to manually create it from the application you used to make the .pptx file, usually Microsoft Word or Google Slides. if you have a PDF file with the same name as the .pprtx with a .pdf extension just do:
+The script WILL NOT create images for the slides (but see below the experimental part) - for that you need a PDF file. The best way to get a PDF is to manually create it from the application you used to make the .pptx file, usually Microsoft Word or Google Slides. if you have a PDF file with the same name as the .pprtx with a .pdf extension run:
 
     python pptx2md.py  --pdf your-preso.pptx 
 
-If you're using Pelican or another CMS that needs it you can also add a prefix to the image paths:
+If you're using Pelican or another CMS that needs it you can also add a prefix to the image paths use the `-i` flag:
 
     python pptx2md.py -p -i {attach} your-preso.pptx 
+
+### Experimental
 
 If you would like to try your luck at getting Libre/Open Office to generate the PDF for you you can do this:
 
