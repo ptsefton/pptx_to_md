@@ -50,11 +50,11 @@ RUN adduser --home=/opt/libreoffice --disabled-password --gecos "" --shell=/bin/
 WORKDIR /app
 
 COPY pptx2md.py  /app
-COPY requirements.txt  /app
 
-RUN pip3 install -r requirements.txt
+# Install required Python packages (uv runner, python-pptx and PyMuPDF)
+RUN pip3 install uv python-pptx PyMuPDF
 
 VOLUME /data
 WORKDIR /data
 
-ENTRYPOINT ["python3", "/app/pptx2md.py"]
+ENTRYPOINT ["uv", "/app/pptx2md.py"]

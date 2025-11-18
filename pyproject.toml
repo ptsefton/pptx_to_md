@@ -2,15 +2,21 @@
 name = "pptx_to_md"
 version = "0.1.0"
 description = "Simple script to convert a Powerpoint presentation to markdown, with the slides as images. The user needs to export the powerpoint as PNG images first."
-authors = ["Peter Sefton <peter.sefton@uts.edu.au>"]
-license = "GPL"
+[project]
+name = "pptx_to_md"
+version = "0.1.0"
+description = "Simple script to convert a PowerPoint presentation to Markdown; exports slides as images and writes an index.md metadata file."
+readme = "README.md"
+license = { text = "GPL" }
+authors = [ { name = "Peter Sefton", email = "peter.sefton@uts.edu.au" } ]
+requires-python = ">=3.8"
 
-[tool.poetry.dependencies]
-python = "^3.8"
-python-pptx = "^0.6.18"
-
-[tool.poetry.dev-dependencies]
+# Runtime dependencies. `uv` runners often read these to create an environment.
+dependencies = [
+	"python-pptx>=0.6.18",
+	"PyMuPDF>=1.22.0"
+]
 
 [build-system]
-requires = ["poetry-core>=1.0.0"]
-build-backend = "poetry.core.masonry.api"
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"

@@ -10,48 +10,42 @@ Takes a PowerPoint file and a PDF of the same file (generated from the same appl
 
 ## Audience
 
-This is for people who know how to run Python or Docker. Instructions are for MacOs.
+This is for people who know how to run Python or Docker. Instructions are for MacOs. The examples below show the `uv` runner (replace with `python`/`python3` if you prefer).
 
 ## About 
 
 This is a simple rough and ready way to turn a Powerpoint slide deck into Markdown.
 
 
-## Installation
+## Installation and running with `uv`
 
-This project uses the [Poetry](https://python-poetry.org/) package manager. 
+This project no longer requires Poetry. Use the `uv` runner to execute the script directly.
 
-* Install Poetry if you don't have it.
+1) Get the code:
 
-* Get this code :
-   ```
-   cd ~/working
-   git clone https://github.com/ptsefton/pptx_to_md.git
-   cd pptx_to_md
-   ```
-
-* Set up a virtual environment with Poetry
-  ```
-  poetry install # Installs the dependencies in a virtual environment
-  poetry shell # Starts an shell so you can use python
-  ```
-
+```bash
+cd ~/working
+git clone https://github.com/ptsefton/pptx_to_md.git
+cd pptx_to_md
+```
+uv run pptx2md.py your-preso.pptx
+```
 
 ### Usage
 
 To create a markdown version of a `.pptx` file, run this:
 
-    python pptx2md.py  your-preso.pptx 
+    uv run pptx2md.py  your-preso.pptx 
 
 The result ia directory `your-preso/` and with an `index.md` file in it.
 
 The script WILL NOT create images for the slides (but see below the experimental part) - for that you need a PDF file. The best way to get a PDF is to manually create it from the application you used to make the .pptx file, usually Microsoft Word or Google Slides. if you have a PDF file with the same name as the .pprtx with a .pdf extension run:
 
-    python pptx2md.py  --pdf your-preso.pptx 
+    uv run pptx2md.py  your-preso.pptx 
 
 If you're using Pelican or another CMS that needs it you can also add a prefix to the image paths use the `-i` flag:
 
-    python pptx2md.py -p -i {attach} your-preso.pptx 
+    uv run pptx2md.py  -i {attach} your-preso.pptx 
 
 ### Experimental
 
@@ -59,21 +53,26 @@ If you would like to try your luck at getting Libre/Open Office to generate the 
 
 ```
 # On a mac with LibreOffice installed
-python3 pptx2md.py --soffice /Applications/LibreOffice.app/Contents/MacOS/soffice  --topdf  preso.pptx
+
+uv run pptx2md.py --soffice /Applications/LibreOffice.app/Contents/MacOS/soffice  --topdf  preso.pptx
 
 # On linux or where soffice is in your path
-python3 pptx2md.py --topdf  preso.pptx
+uv run pptx2md.py --topdf  preso.pptx
 ```
 
 ### As a docker container (experimental)
 
-Make a container: 
+Build the container (this image installs `uv` and the Python dependencies):
 
-`docker build -t rocxl .`
+```bash
+docker build -t pptx2md .
+```
 
-Run the container:
+Run the container (mount current directory as /data):
 
-`docker run -v ${pwd} pptx2md yourfile.pptx`
+```bash
+docker run --rm -v "${PWD}":/data pptx2md yourfile.pptx
+```
 
 
 
