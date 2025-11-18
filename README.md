@@ -24,9 +24,10 @@ This project no longer requires Poetry. Use the `uv` runner to execute the scrip
 1) Get the code:
 
 ```bash
-cd ~/working
 git clone https://github.com/ptsefton/pptx_to_md.git
 cd pptx_to_md
+```
+
 ```
 uv run pptx2md.py your-preso.pptx
 ```
@@ -39,7 +40,7 @@ To create a markdown version of a `.pptx` file, run this:
 
 The result ia directory `your-preso/` and with an `index.md` file in it.
 
-The script WILL NOT create images for the slides (but see below the experimental part) - for that you need a PDF file. The best way to get a PDF is to manually create it from the application you used to make the .pptx file, usually Microsoft Word or Google Slides. if you have a PDF file with the same name as the .pprtx with a .pdf extension run:
+The script WILL NOT create images for the slides (but see below the experimental part) - for that you need a PDF file. The best way to get a PDF is to manually create it from the application you used to make the .pptx file, usually Microsoft Word or Google Slides. if you have a PDF file with the same name as the .pptx with a .pdf extension run:
 
     uv run pptx2md.py  your-preso.pptx 
 
@@ -51,14 +52,14 @@ If you're using Pelican or another CMS that needs it you can also add a prefix t
 
 If you would like to try your luck at getting Libre/Open Office to generate the PDF for you you can do this:
 
-```
+
 # On a mac with LibreOffice installed
 
 uv run pptx2md.py --soffice /Applications/LibreOffice.app/Contents/MacOS/soffice  --topdf  preso.pptx
 
 # On linux or where soffice is in your path
 uv run pptx2md.py --topdf  preso.pptx
-```
+
 
 ### As a docker container (experimental)
 
