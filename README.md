@@ -33,19 +33,52 @@ uv run pptx2md.py your-preso.pptx
 
 ### Usage
 
-To create a markdown version of a `.pptx` file, run this:
+#### Quick Test
 
-    uv run pptx2md.py  your-preso.pptx 
+Try the tool with the included test file:
 
-The result ia directory `your-preso/` and with an `index.md` file in it.
+```bash
+# Basic usage - creates a directory called 'test-preso' with index.md and SVG images
+uv run pptx2md.py test_files/test-preso.pptx
 
-The script WILL NOT create images for the slides (but see below the experimental part) - for that you need a PDF file. The best way to get a PDF is to manually create it from the application you used to make the .pptx file, usually Microsoft Word or Google Slides. if you have a PDF file with the same name as the .pprtx with a .pdf extension run:
+# Specify custom output directory and generate HTML
+uv run pptx2md.py -d out --html test_files/test-preso.pptx
+```
 
-    uv run pptx2md.py  your-preso.pptx 
+#### Basic Usage
 
-If you're using Pelican or another CMS that needs it you can also add a prefix to the image paths use the `-i` flag:
+To create a markdown version of a `.pptx` file:
 
-    uv run pptx2md.py  -i {attach} your-preso.pptx 
+```bash
+uv run pptx2md.py your-preso.pptx
+```
+
+The result is a directory `your-preso/` with an `index.md` file in it.
+
+#### Available Options
+
+**Custom output directory:**
+```bash
+# Specify where to write the output
+uv run pptx2md.py -d /path/to/output your-preso.pptx
+```
+
+**Generate HTML:**
+```bash
+# Create both index.md and index.html
+uv run pptx2md.py --html your-preso.pptx
+```
+
+**Image path prefix:**
+```bash
+# Add a prefix to image paths (useful for Pelican or other CMS)
+uv run pptx2md.py -i {attach} your-preso.pptx
+```
+
+**Combine options:**
+```bash
+uv run pptx2md.py -d output --html -i /images/ your-preso.pptx
+``` 
 
 ### Experimental
 
@@ -60,7 +93,7 @@ uv run pptx2md.py --soffice /Applications/LibreOffice.app/Contents/MacOS/soffice
 uv run pptx2md.py --topdf  preso.pptx
 ```
 
-### As a docker container (experimental)
+### As a docker container (experimental and untested as of 2025-11-19)
 
 Build the container (this image installs `uv` and the Python dependencies):
 

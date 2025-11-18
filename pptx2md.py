@@ -8,30 +8,10 @@ from pptx import Presentation
 import html
 import math
 import shutil
+import commonmark
 
-# Try to import PyMuPDF, make it optional
-HAS_PYMUPDF = False
-try:
-    # Try the correct PyMuPDF import first
-    import pymupdf as fitz
-    HAS_PYMUPDF = True
-except ImportError:
-    try:
-        # Fallback to the old import name
-        import fitz
-        # Verify it's actually PyMuPDF by checking for a specific method
-        if hasattr(fitz, 'open') and hasattr(fitz.Document, 'get_page_count'):
-            HAS_PYMUPDF = True
-        else:
-            print("Found fitz package but it's not PyMuPDF")
-            HAS_PYMUPDF = False
-    except ImportError:
-        HAS_PYMUPDF = False
-
-if not HAS_PYMUPDF:
-    print("PyMuPDF not available. Install with: pip install PyMuPDF")
-    print("SVG conversion will fall back to pdf2svg")
-
+import pymupdf as fitz
+   
 def get_text(slide):
     text = ""
     for shape in slide.shapes:
@@ -131,8 +111,10 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument('filename',  default=None, type=Path, help='Name of input Powerpoint file')
     parser.add_argument('-i', '--img-prefix', default = '', help="String to put in front of image paths")
+    parser.add_argument('-d', '--dir', default=None, type=Path, help="Output directory (created automatically if it doesn't exist)")
     parser.add_argument('-t', '--topdf', default = False, action="store_true", help="Convert DOCX version to PDF using openoffice (soffice)")
     parser.add_argument('-s', '--soffice', default = "soffice", help="soffice command")
+    parser.add_argument('--html', default = False, action="store_true", help="Generate an index.html file from the markdown")
 
     args = vars(parser.parse_args())
 
@@ -140,7 +122,13 @@ if __name__ == "__main__":
     powerpoint_file = args["filename"].resolve()
     base_path = powerpoint_file.parent;
     pdf_file = powerpoint_file.with_suffix(".pdf")
-    out_dir = base_path / powerpoint_file.stem
+    
+    # Use custom directory if provided, otherwise use default (powerpoint_file.stem)
+    if args["dir"]:
+        out_dir = args["dir"].resolve()
+    else:
+        out_dir = base_path / powerpoint_file.stem
+    
     md_path = out_dir / "index.md"
 
 
@@ -157,6 +145,36 @@ if __name__ == "__main__":
     with open(md_path, 'w', encoding='utf-8') as o:
         print("writing", md_path)
         o.write(md)
+
+    # Generate HTML if requested
+    if args["html"]:
+        html_path = out_dir / "index.html"
+        parser = commonmark.Parser()
+        renderer = commonmark.HtmlRenderer()
+        ast = parser.parse(md)
+        html_content = renderer.render(ast)
+        
+        # Wrap in a basic HTML template
+        full_html = f"""<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{powerpoint_file.stem}</title>
+    <style>
+        body {{ font-family: Arial, sans-serif; max-width: 1200px; margin: 0 auto; padding: 20px; }}
+        img {{ max-width: 100%; height: auto; }}
+        section {{ margin: 20px 0; padding: 20px; border: 1px solid #ddd; }}
+    </style>
+</head>
+<body>
+{html_content}
+</body>
+</html>"""
+        
+        with open(html_path, 'w', encoding='utf-8') as o:
+            print("writing", html_path)
+            o.write(full_html)
 
     if args["topdf"]:
         os.chdir(out_dir)
