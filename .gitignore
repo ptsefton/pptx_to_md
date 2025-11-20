@@ -104,3 +104,4 @@ venv.bak/
 .mypy_cache/
 
 uv.lock
+.DS_Store
