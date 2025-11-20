@@ -2,15 +2,15 @@
 
 Powerpoint to Markdown converter - Python 3 script
 
-NOTE: This works on `.pptx` files ONLY - if you're using Google Drive or Keynote etc export your presentation to .pptx first.
+NOTE: This works on `.pptx` files ONLY - if you're using Google Drive or Keynote etc., export your presentation to `.pptx` first.
 
 What does it do:
 
-Takes a PowerPoint file and a PDF of the same file (generated from the same application) and generates a Markdown version in a directory with an image for each slide and a yaml metadata block as used by various static site generators.
+Takes a PowerPoint file and a PDF of the same file (generated from the same application) and generates a Markdown version in a directory with an image for each slide and a `yaml` metadata block as used by various static site generators.
 
 ## Audience
 
-This is for people who know how to run Python or Docker. Instructions are for MacOs. The examples below show the `uv` runner (replace with `python`/`python3` if you prefer).
+This is for people who know how to run Python or Docker. Instructions are for MacOS. The examples below show the `uv` runner (replace with `python`/`python3` if you prefer).
 
 ## About 
 
@@ -20,6 +20,7 @@ This is a simple rough and ready way to turn a Powerpoint slide deck into Markdo
 ## Installation and running with `uv`
 
 This project no longer requires Poetry. Use the `uv` runner to execute the script directly.
+For `uv` installation, see https://docs.astral.sh/uv/.
 
 1) Get the code:
 
@@ -43,7 +44,7 @@ Try the tool with the included test file:
 uv run pptx2md.py test_files/test-preso.pptx
 ```
 
-The result is a directory `test-files/test-preso/ with an `index.md` file in it.
+The result is a directory `test-files/test-preso/` with an `index.md` file in it.
 
 
 ```bash
@@ -76,17 +77,17 @@ uv run pptx2md.py -i {attach} your-preso.pptx
 ```bash
 uv run pptx2md.py -d output --html -i /images/ your-preso.pptx
 ``` 
-The script WILL NOT create images for the slides (but see below the experimental part) - for that you need a PDF file. The best way to get a PDF is to manually create it from the application you used to make the .pptx file, usually Microsoft Word or Google Slides. if you have a PDF file with the same name as the .pptx with a .pdf extension run:
+The script WILL NOT create images for the slides (but see below the experimental part) - for that you need a PDF file. The best way to get a PDF is to manually create it from the application you used to make the .pptx file, usually Microsoft Word or Google Slides. If you have a PDF file with the same name as the .pptx with a .pdf extension run:
 
     uv run pptx2md.py  your-preso.pptx 
 
-If you're using Pelican or another CMS that needs it you can also add a prefix to the image paths use the `-i` flag:
+If you're using Pelican or another CMS that needs it, you can also add a prefix to the image paths use the `-i` flag:
 
     uv run pptx2md.py  -i {attach} your-preso.pptx 
 
 ### Experimental  (Have not checked this as of 2025-11-19)
 
-If you would like to try your luck at getting Libre/Open Office to generate the PDF for you you can do this:
+If you would like to try your luck at getting Libre/Open Office to generate the PDF for you, you can do this:
 
 ```bash
 # On a mac with LibreOffice installed
