@@ -9,6 +9,7 @@ import html
 import math
 import shutil
 import commonmark
+from datetime import date
 
 import pymupdf as fitz
    
@@ -65,9 +66,8 @@ def parse_preso(powerpoint_file, use_svg=False):
     img_prefix = ""  # Add this line or pass as parameter
     
     md = f"""---
-    title:  >
-      {title}
-    date:
+    title: {slug}
+    date: {date.today()}
     slug: {slug}
     category:
     author:
