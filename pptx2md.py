@@ -107,7 +107,7 @@ def parse_preso(powerpoint_file, use_svg=False):
     return md, formatString
 
 
-if __name__ == "__main__":
+def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('filename',  default=None, type=Path, help='Name of input Powerpoint file')
     parser.add_argument('-i', '--img-prefix', default = '', help="String to put in front of image paths")
@@ -185,4 +185,8 @@ if __name__ == "__main__":
                         stdout=subprocess.PIPE).communicate()
 
     save_images_from_pdf(out_dir, pdf_file.name, formatString)
+
+
+if __name__ == "__main__":
+    main()
 
