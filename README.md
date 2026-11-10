@@ -22,6 +22,23 @@ This is a simple rough and ready way to turn a Powerpoint slide deck into Markdo
 This project no longer requires Poetry. Use the `uv` runner to execute the script directly.
 For `uv` installation, see https://docs.astral.sh/uv/.
 
+### Run without cloning or installing
+
+Use `uvx` to run the latest version directly from GitHub. It creates an isolated,
+temporary environment for the command (and caches it for reuse):
+
+```bash
+uvx --from git+https://github.com/ptsefton/pptx_to_md.git pptx2md your-preso.pptx
+```
+
+You can pass the usual options, for example:
+
+```bash
+uvx --from git+https://github.com/ptsefton/pptx_to_md.git pptx2md --html your-preso.pptx
+```
+
+The `.pptx` file and its matching `.pdf` file need to be in the same directory.
+
 1) Get the code:
 
 ```bash

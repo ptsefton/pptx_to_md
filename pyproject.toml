@@ -14,6 +14,9 @@ dependencies = [
 	"commonmark>=0.9.1"
 ]
 
+[project.scripts]
+pptx2md = "pptx2md:main"
+
 [tool.setuptools]
 py-modules = ["pptx2md"]
 
