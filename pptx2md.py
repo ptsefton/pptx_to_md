@@ -78,7 +78,7 @@ def parse_preso(powerpoint_file, use_svg=False):
 
     """
     
-    digits = math.floor(math.log10(len(slides))) + 1
+    digits = math.floor(math.log10(len(slides))) + 1 if slides else 1
     count = -1
     
     # Choose file extension based on format
